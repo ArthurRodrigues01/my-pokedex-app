@@ -39,5 +39,5 @@ export const getID = (link) => {
     id += link[i];
   }
   
-  return id;
+  return Number(id);
 }

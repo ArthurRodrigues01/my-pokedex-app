@@ -1,18 +1,72 @@
+/*
+  Useful colors:
+
+  #282c34
+
+*/
+
 body{
-  background-color: #ddd;
+  background-color: #ff0000;
+}
+
+.back-button {
+  height: 50px;
+  width: 50px;
+  font-size: 15px;
+  margin-right: 15px;
+  background-color: #434a56;
+  color: white;
+  cursor: pointer;
+} 
+
+.pokemon-name {
+  font-weight: 600;
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+
+.next-button {
+  height: 50px;
+  width: 50px;
+  font-size: 15px;
+  margin-left: 15px;
+  background-color: #434a56;
+  color: white;
+  cursor: pointer;
+}
+
+.page-button {
+  height: 50px;
+  width: 50px;
+  font-size: 15px;
+  background-color: #434a56;
+  color: white;
+  cursor: pointer;
+}
+.current-page-button {
+  height: 50px;
+  width: 50px;
+  font-size: 15px;
+  background-color: #282c34;
+  color: white;
 }
 
 .sprite{
-  max-width: 200px;
-  max-height: 200px;
+  height: 250px;
   width: auto;
-  height: auto;
+}
+
+.pagination-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .App {
   text-align: center;
-  background-color: #282c34;
-  color: white;
+  background-color: white;
+  color: black;
 }
 
 .App-logo {
