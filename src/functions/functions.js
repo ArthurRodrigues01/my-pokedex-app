@@ -1,12 +1,15 @@
 
 export const replaceUselessCharacters = function(string, arrayOfChars) {
-  return [...string].map(item => {
+  let newString = '';
+  [...string].forEach(item => {
     if (arrayOfChars.indexOf(item) != -1) {
-      return ' '
+      newString += ' ';
+    } else {
+      newString += item;
     } 
-    
-    return item;
-  });
+  })
+  
+  return newString;
 }
 export const capitalize = word => {
   word = [...word].map((item, index) => index != 0 ? item : item.toUpperCase());

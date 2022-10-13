@@ -1,3 +1,5 @@
+import { replaceUselessCharacters } from "../functions/functions";
+
 export const getDex = (offset, limit) => {
   const baseLink = 'https://pokeapi.co/api/v2/pokemon-species/';
   let apiLink;
@@ -12,7 +14,7 @@ export const getDex = (offset, limit) => {
   return req;
 };
 
-export const getSprite = (name) => {
+export const getPokemonData = async (name) => {
   const nonRegularNames = {
     deoxys: 'deoxys-normal',
     giratina : 'giratina-altered',
@@ -22,22 +24,37 @@ export const getSprite = (name) => {
     wishiwashi : 'wishiwashi-solo',
     eiscue : 'eiscue-ice',
     enamorus : 'enamorus-incarnate'
-  }
+  };
 
   if (nonRegularNames[name] !== undefined) {
     name = nonRegularNames[name];
-  }
-  const link = `https://img.pokemondb.net/artwork/large/${name}.jpg`;
+  };
   
-  return link;
-}
+  return await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`).then(res => res.json()).then(data => {
+    return {
+      id : data.id,
+      types : data.types.map(item => item.type.name),
+      sprite_link : data.sprites.other["official-artwork"].front_default,
+      height : data.height / 10, // Decimeters => Meters
+      weight : data.weight / 10, // Hectograms => Kilograms
+      name : name
+    };
+  }).then(async data => {
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${data.id}`);
+    const data1 = await res.json();
+    const description = data1.flavor_text_entries.find(item => item.language.name === 'en').flavor_text;
+    return { ...data, description: replaceUselessCharacters(description, ['\n', '\f']) };
+  });
+};
 
-export const getID = (link) => {
-  let id = '';
-  let i;
-  for (i = 42; i < link.length - 1; i++) {
-    id += link[i];
-  }
-  
-  return Number(id);
-}
+/*
+  pokemonData = {
+    id : data.id,
+    types : types.map(item => item.type.name),
+    sprite_link : data.sprites.other["official-artwork"].front_default,
+    height : data.height / 10, // Decimeters => Meters
+    weight : data.weight / 10, // Hectograms => Kilograms
+    name : name,
+    description : description
+  };
+ */
