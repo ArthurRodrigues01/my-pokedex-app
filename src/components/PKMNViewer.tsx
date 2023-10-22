@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { TypeImage, TypeSphere, getPKMNTypeColor, getPKMNWrapperBGColor } from './pkmnTypeSphereComponents'
+import { SpriteSphere, SpriteImage } from './generalPKMNComponents'
 import { PokedexEntry, PKMNData } from '../others/custom-types'
 import { capitalize, rmF } from '../functions/other-functions'
 
@@ -25,22 +26,6 @@ const StatsWrapper =  styled.div<{ type: string }>`
 
   width: 325px;
   height: 550px;
-`
-const SpriteSphere = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100000px;
-  background-color: #ffe294;
-
-  width: 250px;
-  height: 250px;
-`
-const SpriteImage = styled.img`
-  width: auto;
-  height: auto;
-  max-width: 200px;
-  max-height: 200px;
 `
 const PKMNTypeWrapper = styled.div`
   display: flex;
@@ -95,9 +80,9 @@ function PKMNViewer(props: PKMNData) {
   return (
     <PKMNWrapper type={props.types[0]}>
       <StatsWrapper type={props.types[0]}>
-        <h2>{capitalize(props.name)}#{props.id}</h2>
+        <h2>{capitalize(props.name)} #{props.id}</h2>
         <SpriteSphere>
-          <SpriteImage src={props.sprite_image_link}/>
+          <SpriteImage src={props.sprite_src}/>
         </SpriteSphere>
         <h2>Gen: {props.gen}</h2>
         <h2>Weight: {props.weight}KG</h2>

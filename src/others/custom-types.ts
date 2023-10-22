@@ -27,7 +27,7 @@ interface PKMNData {
   weight: number, 
   height: number, 
   name: string, 
-  sprite_image_link: string, 
+  sprite_src: string, 
   pokedex_entries: PokedexEntry[] 
 }
 

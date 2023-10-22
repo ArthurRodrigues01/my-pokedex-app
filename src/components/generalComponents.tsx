@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const CenteredPage = styled.div`
-  height: 98vh;
+  min-height: 98vh;
   display: flex;
   justify-content: center;
   align-items: center;

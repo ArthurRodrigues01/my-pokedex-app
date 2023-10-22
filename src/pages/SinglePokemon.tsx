@@ -8,7 +8,7 @@ import { CenteredPage } from '../components/generalComponents'
 import { Content } from '../others/custom-types'
 
 
-function preloadImage(currentPKMNId: number, count = 1 ) {
+function preloadNextImages(currentPKMNId: number, count = 1 ) {
   for (let i = 1; i <= count; i++) {
     const item = document.createElement('link')
     item.rel = 'preload'
@@ -18,7 +18,7 @@ function preloadImage(currentPKMNId: number, count = 1 ) {
   }
 }
 
-function preloadPage(currentPKMNId: number, count = 1 ) {
+function preloadNextPages(currentPKMNId: number, count = 1 ) {
   for (let i = 1; i <= count; i++) {
     const item = document.createElement('link')
     item.rel = 'preload'
@@ -52,8 +52,8 @@ function SinglePokemon() {
 
   useEffect(() => {
     if (content !== undefined && (content.id == Number(slug) && isFinite(Number(slug)))) {
-      preloadImage(content.id, 3)
-      preloadPage(content.id, 3)
+      preloadNextImages(content.id, 3)
+      preloadNextPages(content.id, 3)
     }
   }, [content])
   
@@ -63,7 +63,7 @@ function SinglePokemon() {
 
   return (
     <CenteredPage>
-      <PKMNViewer id={content.id} gen={getGen(content.id)} name={content.name} height={content.height} weight={content.weight} types={content.types} pokedex_entries={content.pokedex_entries} sprite_image_link={content.image} />
+      <PKMNViewer id={content.id} gen={getGen(content.id)} name={content.name} height={content.height} weight={content.weight} types={content.types} pokedex_entries={content.pokedex_entries} sprite_src={content.image} />
       <PaginationBar currentPage={content.id} growth={3} maxPages={maxNumberOfPokemons}/>
     </CenteredPage>
   )
