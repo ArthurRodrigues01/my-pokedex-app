@@ -1,4 +1,5 @@
 import { styled } from "styled-components/"
+import { NoFeedbackA } from "./generalComponents"
 
 const PaginationBarWrapper = styled.div`
   display: flex;
@@ -6,7 +7,7 @@ const PaginationBarWrapper = styled.div`
   background-color: #fff;
   border-radius: 1000px;
 `
-const PaginationButton = styled.a`
+const PaginationButton = styled(NoFeedbackA)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +15,6 @@ const PaginationButton = styled.a`
   padding: 0 1.5rem 0 1.5rem; 
   height: 3rem;
   width: 3rem;
-  text-decoration: none;
 
   &: hover {
     background-color: gray;

@@ -26,5 +26,8 @@ const FlexCol = styled.div<{ gap?: number }>`
   flex-direction: column;
   gap: ${props => props.gap || 0}px
 `
+const NoFeedbackA = styled.a`
+  text-decoration: none;
+`
 
-export { CenteredPage, Title, BigTitle, FlexRow, FlexCol }
+export { CenteredPage, Title, BigTitle, FlexRow, FlexCol, NoFeedbackA }
