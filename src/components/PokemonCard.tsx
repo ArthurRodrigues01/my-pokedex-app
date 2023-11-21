@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { TypeImage, TypeSphere, getPKMNTypeColor, getPKMNWrapperBGColor } from './pkmnTypeSphereComponents'
-import { SpriteSphere, SpriteImage } from './generalPKMNComponents'
-import { PokedexEntry, PKMNData } from '../others/custom-types'
+import { TypeImage, TypeSphere, getPokemonTypeColor, getPokemonWrapperBGColor } from './pokemonTypeSphereComponents'
+import { SpriteSphere, SpriteImage } from './generalPokemonComponents'
+import { PokedexEntry, PokemonData } from '../custom-types'
 import { capitalize, rmF } from '../functions/other-functions'
 
-const PKMNWrapper = styled.div<{ type: string }>`
+const PokemonWrapper = styled.div<{ type: string }>`
   width: 800px;
   border-radius: 25px;
   border-top-right-radius: 0;
   border-bottom-left-radius: 0;
-  background-color: ${props => getPKMNWrapperBGColor(props.type)};
+  background-color: ${props => getPokemonWrapperBGColor(props.type)};
   display: flex;
   flex-direction: row;
 `
@@ -22,12 +22,12 @@ const StatsWrapper =  styled.div<{ type: string }>`
   align-items: center;
   padding: 2rem;
   border-top-left-radius: 25px;
-  background-color: ${props => getPKMNTypeColor(props.type)};
+  background-color: ${props => getPokemonTypeColor(props.type)};
 
   width: 325px;
   height: 550px;
 `
-const PKMNTypeWrapper = styled.div`
+const PokemonTypeWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -74,11 +74,11 @@ const VersionSelectorWrapper = styled.div`
   left: 15px;
 `
 
-function PKMNViewer(props: PKMNData) {
+function PokemonCard(props: PokemonData) {
   const [entry, setEntry] = useState(rmF(props.pokedex_entries[0].flavor_text)) 
 
   return (
-    <PKMNWrapper type={props.types[0]}>
+    <PokemonWrapper type={props.types[0]}>
       <StatsWrapper type={props.types[0]}>
         <h2>{capitalize(props.name)} #{props.id}</h2>
         <SpriteSphere>
@@ -87,11 +87,11 @@ function PKMNViewer(props: PKMNData) {
         <h2>Gen: {props.gen}</h2>
         <h2>Weight: {props.weight}KG</h2>
         <h2>Height: {props.height}M</h2>
-        <PKMNTypeWrapper>
+        <PokemonTypeWrapper>
           {props.types.map((type: string) => {
             return <TypeSphere type={type} key={type}><TypeImage src={`/assets/pokemon-types/${type}.svg`}/></TypeSphere>
           })}
-        </PKMNTypeWrapper>
+        </PokemonTypeWrapper>
       </StatsWrapper>
       <FlexCol>
         <Description>{entry}</Description>
@@ -104,8 +104,8 @@ function PKMNViewer(props: PKMNData) {
           </VersionSelector>
         </VersionSelectorWrapper>
       </FlexCol>
-    </PKMNWrapper>
+    </PokemonWrapper>
   )
 }
 
-export default PKMNViewer
+export default PokemonCard

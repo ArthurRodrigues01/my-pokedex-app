@@ -1,5 +1,5 @@
 import { styled } from "styled-components/"
-import { NoFeedbackA } from "./generalComponents"
+import { NoFeedbackAnchor } from "./generalComponents"
 
 const PaginationBarWrapper = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ const PaginationBarWrapper = styled.div`
   background-color: #fff;
   border-radius: 1000px;
 `
-const PaginationButton = styled(NoFeedbackA)`
+const PaginationButton = styled(NoFeedbackAnchor)`
   display: flex;
   justify-content: center;
   align-items: center;

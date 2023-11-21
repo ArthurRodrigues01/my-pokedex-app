@@ -1,38 +1,38 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getPokemonData, getMaxNumberOfPokemons, getGen } from '../functions/poke-functions'
-import PKMNViewer from '../components/PKMNViewer'
+import PokemonCard from '../components/PokemonCard'
 import PaginationBar from '../components/PaginationBar'
 import LoadingFeedback from '../components/LoadingFeedback'
 import { CenteredPage } from '../components/generalComponents'
-import { Content } from '../others/custom-types'
+import { Content } from '../custom-types'
 
 
-function preloadNextImages(currentPKMNId: number, count = 1 ) {
+function preloadNextImages(currentPokemonId: number, count = 1 ) {
   for (let i = 1; i <= count; i++) {
     const item = document.createElement('link')
     item.rel = 'preload'
     item.as = 'image'
-    item.href = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currentPKMNId + i}.png` 
+    item.href = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currentPokemonId + i}.png` 
     document.head.appendChild(item)
   }
 }
 
-function preloadNextPages(currentPKMNId: number, count = 1 ) {
+function preloadNextPages(currentPokemonId: number, count = 1 ) {
   for (let i = 1; i <= count; i++) {
     const item = document.createElement('link')
     item.rel = 'preload'
     item.as = 'fetch'
     item.type = 'aplication/json'
     item.crossOrigin = 'anonymous'
-    item.href = `https://pokeapi.co/api/v2/pokemon/${currentPKMNId + i}` 
+    item.href = `https://pokeapi.co/api/v2/pokemon/${currentPokemonId + i}` 
     
     const subItem = document.createElement('link')
     subItem.rel = 'preload'
     subItem.as = 'fetch'
     subItem.type = 'aplication/json'
     subItem.crossOrigin = 'anonymous'
-    subItem.href = `https://pokeapi.co/api/v2/pokemon-species/${currentPKMNId + i}` 
+    subItem.href = `https://pokeapi.co/api/v2/pokemon-species/${currentPokemonId + i}` 
     
     document.head.appendChild(item)
     document.head.appendChild(subItem)
@@ -63,7 +63,7 @@ function SinglePokemon() {
 
   return (
     <CenteredPage>
-      <PKMNViewer id={content.id} gen={getGen(content.id)} name={content.name} height={content.height} weight={content.weight} types={content.types} pokedex_entries={content.pokedex_entries} sprite_src={content.image} />
+      <PokemonCard id={content.id} gen={getGen(content.id)} name={content.name} height={content.height} weight={content.weight} types={content.types} pokedex_entries={content.pokedex_entries} sprite_src={content.image} />
       <PaginationBar currentPage={content.id} growth={3} maxPages={maxNumberOfPokemons}/>
     </CenteredPage>
   )

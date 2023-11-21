@@ -7,7 +7,7 @@ const TypeSphere  = styled.div<{type: string}>`
   width: 50px;
   height: 50px;
   border-radius: 100px;
-  background-color: ${props => getPKMNTypeColor(props.type)}
+  background-color: ${props => getPokemonTypeColor(props.type)}
 `
 
 const TypeImage = styled.img`
@@ -15,12 +15,12 @@ const TypeImage = styled.img`
   width: 25px;
 `
 
-export { TypeSphere, TypeImage, getPKMNTypeColor, getPKMNWrapperBGColor }
+export { TypeSphere, TypeImage, getPokemonTypeColor, getPokemonWrapperBGColor}
 
 
 
-function getPKMNWrapperBGColor(PKMNType: string): string {
-  switch(PKMNType) {
+function getPokemonWrapperBGColor(PokemonType: string): string {
+  switch(PokemonType) {
     case 'bug':
       return '#759623'
     case 'dark': 
@@ -61,8 +61,8 @@ function getPKMNWrapperBGColor(PKMNType: string): string {
       return '#d4d4d4'  
   }
 }
-function getPKMNTypeColor(PKMNType: string): string {
-  switch(PKMNType) {
+function getPokemonTypeColor(PokemonType: string): string {
+  switch(PokemonType) {
     case 'bug':
       return '#92BC2C'
     case 'dark': 

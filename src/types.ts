@@ -1,0 +1,1 @@
+export type PokemonPreviewData = { name: string, first_type: string, sprite_src: string, id: number }

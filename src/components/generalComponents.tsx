@@ -10,7 +10,6 @@ const CenteredPage = styled.div`
   margin-left: calc(16rem + 3rem);
 `
 const Title = styled.h1 `
-  color: #fff;
   font-size: 2rem;
 `
 const BigTitle = styled(Title)`
@@ -26,8 +25,8 @@ const FlexCol = styled.div<{ gap?: number }>`
   flex-direction: column;
   gap: ${props => props.gap || 0}px
 `
-const NoFeedbackA = styled.a`
+const NoFeedbackAnchor = styled.a`
   text-decoration: none;
 `
 
-export { CenteredPage, Title, BigTitle, FlexRow, FlexCol, NoFeedbackA }
+export { CenteredPage, Title, BigTitle, FlexRow, FlexCol, NoFeedbackAnchor }

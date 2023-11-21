@@ -27,18 +27,6 @@ async function getMaxNumberOfPokemons() {
   return c
 }
 
-async function getNextPKMNsURLs(url: string) {
-  const a = await fetch(url)
-  const b = await a.json()
-  const c: string[] = b.results.map((result: { name: string, url: string }) => result.url)
-  const d = {
-    next: b.next,
-    results: c
-  }
-
-  return d
-}
-
 function getGen(id: number): number {
   if (id < 152) {
     return 1
@@ -62,4 +50,4 @@ function getGen(id: number): number {
 }
 
 export default getPokemonData
-export { getPokemonData, getMaxNumberOfPokemons, getGen, getNextPKMNsURLs}
+export { getPokemonData, getMaxNumberOfPokemons, getGen}

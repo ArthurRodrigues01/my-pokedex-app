@@ -1,18 +1,5 @@
 import styled, { keyframes } from 'styled-components'
 
-// const LoadingFeedbackText = styled.h1`
-//   font-weight: bold;
-//   color: #ffffff;
-//   margin: 0;
-//   padding: 0;
-// `
-// const LoadingFeedbackWrapper = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   flex-direction: row;
-//   gap: 25px;
-// `
 const rotatingAnimation = keyframes`
   from {
     transform: rotate(0deg);
@@ -27,15 +14,18 @@ const Rotate = styled.div`
 `
 
 
-const Pokeball = styled.img`
-  width: 250px;
-  height: 250px;
+const Pokeball = styled.img<{ width: number, height: number }>`
+  width: ${props => props.width}px;
+  height: ${props => props.height}px;
 `
 
-function LoadingFeedback() {
+function LoadingFeedback( { width, height }: { width?: number, height?: number }) {
+  width = !width ? width = 250 : width
+  height = !height ? height = 250 : height
+  
   return (
     <Rotate>
-      <Pokeball src='/pokeball.svg' alt='loading'/>
+      <Pokeball width={width} height={height} src='/pokeball.svg' alt='loading'/>
     </Rotate>
   )
 }
