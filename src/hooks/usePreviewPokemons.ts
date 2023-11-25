@@ -5,7 +5,7 @@ const POKEMONS_PER_COLUMN = 16
 const LIMIT = POKEMONS_PER_LINE * POKEMONS_PER_COLUMN
 
 
-function useNextPokemons() {
+function usePreviewPokemons() {
   const [firstLoading, setFirstLoading] = useState(true)
   const isFetchingMore = useRef(false)
   const nextFetch = useRef('')
@@ -47,4 +47,4 @@ function useNextPokemons() {
   } 
 }
 
-export default useNextPokemons
+export default usePreviewPokemons

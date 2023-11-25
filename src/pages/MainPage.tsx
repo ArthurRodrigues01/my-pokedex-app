@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { CenteredPage, Title, BigTitle, FlexRow, FlexCol} from "../components/generalComponents"
 import PokemonPreviewCard from '../components/PokemonPreviewCard'
-import useNextPokemons from "../hooks/useNextPokemons"
+import usePreviewPokemons from "../hooks/usePreviewPokemons"
 import useWindowScrollBottom from "../hooks/useWindowScrollBottom"
 
 
@@ -17,7 +17,7 @@ const FlexPage = styled(FlexRow)`
 `
 
 function MainPage() {
-  const { loading, pokemons_data, fetchNextPokemons, isFetchingMore } = useNextPokemons()
+  const { loading, pokemons_data, fetchNextPokemons, isFetchingMore } = usePreviewPokemons()
 
   useWindowScrollBottom(() => {
     if (!isFetchingMore) fetchNextPokemons()

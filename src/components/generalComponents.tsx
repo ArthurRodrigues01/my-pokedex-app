@@ -25,8 +25,16 @@ const FlexCol = styled.div<{ gap?: number }>`
   flex-direction: column;
   gap: ${props => props.gap || 0}px
 `
+const CenteredFlexCol = styled(FlexCol)`
+  justify-content: center;
+  align-items: center;
+`
+const CenteredFlexRow = styled(FlexRow)`
+  justify-content: center;
+  align-items: center;
+`
 const NoFeedbackAnchor = styled.a`
   text-decoration: none;
 `
 
-export { CenteredPage, Title, BigTitle, FlexRow, FlexCol, NoFeedbackAnchor }
+export { CenteredPage, Title, BigTitle, FlexRow, FlexCol, CenteredFlexCol, NoFeedbackAnchor }

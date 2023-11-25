@@ -41,17 +41,17 @@ const PaginationIcon = styled.img`
   width: 2rem;
 `
 
-function PaginationBar(props: { currentPage: number, growth: number, maxPages: number }) {
+function PaginationBar({ current, growth, max }: { current: number, growth: number, max: number }) {
   let initialCell: number
-  const numberOfCells = 1 + (props.growth * 2)
+  const numberOfCells = 1 + (growth * 2)
   let cells: number[] = []
 
-  if ((props.currentPage - props.growth) < 1) {
+  if ((current - growth) < 1) {
     initialCell = 1
-  } else if ((props.currentPage + props.growth) > props.maxPages) {
-    initialCell = props.maxPages - (numberOfCells - 1) 
+  } else if ((current + growth) > max) {
+    initialCell = max - (numberOfCells - 1) 
   } else {
-    initialCell = props.currentPage - props.growth
+    initialCell = current - growth
   }
 
   for (let i = 0; i < numberOfCells; i++) {
@@ -62,11 +62,11 @@ function PaginationBar(props: { currentPage: number, growth: number, maxPages: n
   return (
     <PaginationBarWrapper>
       {cells.map((cell) => {
-        if (cell == props.currentPage) {
-          return <Centered><PaginationIcon src="/pokeball.svg"/></Centered>
+        if (cell == current) {
+          return <Centered key={cell}><PaginationIcon src="/pokeball.svg"/></Centered>
         } 
 
-        return <PaginationButton href={`./${cell}`}>{cell}</PaginationButton>
+        return <PaginationButton href={`./${cell}`} key={cell}>{cell}</PaginationButton>
       })}   
     </PaginationBarWrapper>
   )

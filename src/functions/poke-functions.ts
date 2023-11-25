@@ -1,3 +1,5 @@
+import { PokedexEntry } from '../types'
+
 async function getPokemonData(id: number) {
   const a = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
   const b = await a.json()
@@ -5,16 +7,19 @@ async function getPokemonData(id: number) {
   const b2 = await fetch(b.species.url)
   const c2 = await b2.json()
   const pokedexEntries = c2.flavor_text_entries.filter((entry: any) => entry.language.name == 'en')
-
-  const c = JSON.stringify({
-    id: b.id,
-    name: b.species.name,
+  const MAX_NUMBER_OF_POKEMONS = await getMaxNumberOfPokemons()
+  
+  const c = {
+    id: b.id as number,
+    gen: getGen(b.id),
+    name: b.species.name as string,
     weight: b.weight / 10, // ??? -> KG
     height: b.height /10, // Decimeters -> Meters
-    types: b.types.map((item: any) => item.type.name),
-    image: b.sprites.other["official-artwork"].front_default,
-    pokedex_entries: pokedexEntries
-  })
+    types: b.types.map((item: any) => item.type.name) as string[],
+    sprite_src: b.sprites.other["official-artwork"].front_default as string,
+    pokedex_entries: pokedexEntries as PokedexEntry[],
+    max_number_of_pokemons: MAX_NUMBER_OF_POKEMONS
+  }
 
   return c
 }

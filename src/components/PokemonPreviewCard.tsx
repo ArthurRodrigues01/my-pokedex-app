@@ -1,11 +1,13 @@
+
+import { PokemonPreviewData } from '../types'
 import { useState, useEffect, useRef } from 'react'
 import useOnScreen from '../hooks/useOnScreen'
-import { PokemonPreviewData } from '../types'
-import styled from 'styled-components'
 import { FlexCol, Title, BigTitle, NoFeedbackAnchor } from './generalComponents'
 import { SpriteSphere, SpriteImage } from './generalPokemonComponents'
-import { getPokemonTypeColor } from './pokemonTypeSphereComponents'
 import PokemonPreviewCardLoading from './PokemonPreviewCardLoading'
+import styled from 'styled-components'
+import { getPokemonTypeColor } from './pokemonTypeSphereComponents'
+import { capitalize } from '../functions/other-functions'
 
 const PokemonPreviewCardWrapper = styled(FlexCol)<{ type: string }>`
   padding: 2rem;
@@ -53,12 +55,12 @@ function PokemonPreviewCard({ name, url }: { name: string, url: string }) {
   }
 
   // if pokemon preview data hasn't loaded yet, return feedback to user
-  if (!pokemonPreviewData) return <PokemonPreviewCardLoading refOb={ref} name={name}/>
+  if (!pokemonPreviewData) return <PokemonPreviewCardLoading refOb={ref} name={capitalize(name)}/>
 
   return (
     <HoverableGrowthFeedback ref={ref} href={`./pokemon/${pokemonPreviewData.id}`}>
       <PokemonPreviewCardWrapper type={pokemonPreviewData.first_type} gap={24}>
-        <Title>{pokemonPreviewData.name}</Title>
+        <Title>{capitalize(pokemonPreviewData.name)}</Title>
         <SpriteSphere>
           <SpriteImage src={pokemonPreviewData.sprite_src}/>
         </SpriteSphere>

@@ -2,8 +2,9 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { TypeImage, TypeSphere, getPokemonTypeColor, getPokemonWrapperBGColor } from './pokemonTypeSphereComponents'
 import { SpriteSphere, SpriteImage } from './generalPokemonComponents'
-import { PokedexEntry, PokemonData } from '../custom-types'
-import { capitalize, rmF } from '../functions/other-functions'
+import NoPokemonImageFound from './NoPokemonImageFound'
+import { PokedexEntry, PokemonData } from '../types'
+import { capitalize, rmFchars } from '../functions/other-functions'
 
 const PokemonWrapper = styled.div<{ type: string }>`
   width: 800px;
@@ -75,14 +76,14 @@ const VersionSelectorWrapper = styled.div`
 `
 
 function PokemonCard(props: PokemonData) {
-  const [entry, setEntry] = useState(rmF(props.pokedex_entries[0].flavor_text)) 
+  const [entry, setEntry] = useState(props.pokedex_entries[0] ? rmFchars(props.pokedex_entries[0].flavor_text) : 'No description available') 
 
   return (
     <PokemonWrapper type={props.types[0]}>
       <StatsWrapper type={props.types[0]}>
         <h2>{capitalize(props.name)} #{props.id}</h2>
         <SpriteSphere>
-          <SpriteImage src={props.sprite_src}/>
+          {props.sprite_src ? <SpriteImage src={props.sprite_src}/> : <NoPokemonImageFound/>}
         </SpriteSphere>
         <h2>Gen: {props.gen}</h2>
         <h2>Weight: {props.weight}KG</h2>
@@ -97,7 +98,7 @@ function PokemonCard(props: PokemonData) {
         <Description>{entry}</Description>
         <VersionSelectorWrapper>
           <VersionSelectorLabel>Version:</VersionSelectorLabel>
-          <VersionSelector onChange={(e) => { setEntry(rmF(props.pokedex_entries.filter((elm: PokedexEntry) => elm.version.name == e.target.value)[0].flavor_text))}}>
+          <VersionSelector onChange={(e) => { setEntry(rmFchars(props.pokedex_entries.filter((elm: PokedexEntry) => elm.version.name == e.target.value)[0].flavor_text))}}>
             {props.pokedex_entries.map((pokedexEntry: PokedexEntry) => {
               return <option key={pokedexEntry.version.name} value={pokedexEntry.version.name}>{capitalize(pokedexEntry.version.name)}</option>
             })}
