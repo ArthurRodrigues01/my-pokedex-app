@@ -16,7 +16,7 @@ function Header() {
       <BigTitle>Pókedex</BigTitle>
       <FlexRow>
         <a href="/pokemon">Pókemons</a>
-        <a href="/">Página Principal</a>
+        <a href="/">Main Page</a>
       </FlexRow>
     </RightSideNavbar>
   )

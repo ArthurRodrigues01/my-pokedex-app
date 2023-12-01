@@ -20,7 +20,7 @@ const WhiteTitle = styled(BigTitle)`
   color: #ffffff;
 `
 
-function LoadingFeedback( { width, height }: { width?: number, height?: number }) {
+function LoadingFeedback( { children, width, height }: { children?: string, width?: number, height?: number }) {
   width = !width ? width = 250 : width
   height = !height ? height = 250 : height
   
@@ -29,7 +29,7 @@ function LoadingFeedback( { width, height }: { width?: number, height?: number }
       <Rotate>
         <Pokeball width={width} height={height} src='/pokeball.svg' alt='loading'/>
       </Rotate>
-      <WhiteTitle>Loading...</WhiteTitle>
+      {children && <WhiteTitle>{children}</WhiteTitle>}
     </CenteredFlexCol>
   )
 }

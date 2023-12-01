@@ -37,4 +37,4 @@ const NoFeedbackAnchor = styled.a`
   text-decoration: none;
 `
 
-export { CenteredPage, Title, BigTitle, FlexRow, FlexCol, CenteredFlexCol, NoFeedbackAnchor }
+export { CenteredPage, Title, BigTitle, FlexRow, FlexCol, CenteredFlexCol, CenteredFlexRow, NoFeedbackAnchor }

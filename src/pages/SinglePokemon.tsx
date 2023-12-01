@@ -24,7 +24,7 @@ function SinglePokemon() {
   }, [slug])
 
 
-  if (pokemonData == undefined) return <CenteredPage><LoadingFeedback/></CenteredPage>
+  if (pokemonData == undefined) return <CenteredPage><LoadingFeedback>Loading...</LoadingFeedback></CenteredPage>
 
   return (
     <CenteredPage>

@@ -1,13 +1,20 @@
 import { useEffect } from 'react'
 
 function useWindowScrollBottom(callback: () => void, deps: React.DependencyList ) {
-
+  
   useEffect(() => {
-    window.onscroll = () => {
-      if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight) callback()
-    }
-  }, [...deps])
+    const eventHandler = () => {
+      const pageHeight = (document.querySelector('#root') as HTMLElement).offsetHeight
+      const windowHeight = window.innerHeight
+      const scrolledDownPortion = Math.round(window.scrollY)
 
+      if ((windowHeight + scrolledDownPortion) >= pageHeight) callback()
+    }
+
+    window.addEventListener('scroll', eventHandler)
+
+    return () => window.removeEventListener('scroll', eventHandler)
+  }, [...deps])
 }
 
 export default useWindowScrollBottom
