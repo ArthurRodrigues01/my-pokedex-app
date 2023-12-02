@@ -1,5 +1,36 @@
 import { styled } from "styled-components/"
-import { NoFeedbackAnchor } from "./generalComponents"
+import { NoFeedbackAnchor } from "../generalComponents"
+
+function PaginationBar({ current, growth, max }: { current: number, growth: number, max: number }) {
+  let initialCell: number
+  const numberOfCells = 1 + (growth * 2)
+  let cells: number[] = []
+
+  if ((current - growth) < 1) {
+    initialCell = 1
+  } else if ((current + growth) > max) {
+    initialCell = max - (numberOfCells - 1) 
+  } else {
+    initialCell = current - growth
+  }
+
+  for (let i = 0; i < numberOfCells; i++) {
+    cells.push(initialCell)
+    initialCell++
+  }
+  
+  return (
+    <PaginationBarWrapper>
+      {cells.map((cell) => {
+        if (cell == current) {
+          return <Centered key={cell}><PaginationIcon src="/pokeball.svg"/></Centered>
+        } 
+
+        return <PaginationButton href={`./${cell}`} key={cell}>{cell}</PaginationButton>
+      })}   
+    </PaginationBarWrapper>
+  )
+}
 
 const PaginationBarWrapper = styled.div`
   display: flex;
@@ -40,37 +71,5 @@ const PaginationIcon = styled.img`
   height: 2rem;
   width: 2rem;
 `
-
-function PaginationBar({ current, growth, max }: { current: number, growth: number, max: number }) {
-  let initialCell: number
-  const numberOfCells = 1 + (growth * 2)
-  let cells: number[] = []
-
-  if ((current - growth) < 1) {
-    initialCell = 1
-  } else if ((current + growth) > max) {
-    initialCell = max - (numberOfCells - 1) 
-  } else {
-    initialCell = current - growth
-  }
-
-  for (let i = 0; i < numberOfCells; i++) {
-    cells.push(initialCell)
-    initialCell++
-  }
-  
-  return (
-    <PaginationBarWrapper>
-      {cells.map((cell) => {
-        if (cell == current) {
-          return <Centered key={cell}><PaginationIcon src="/pokeball.svg"/></Centered>
-        } 
-
-        return <PaginationButton href={`./${cell}`} key={cell}>{cell}</PaginationButton>
-      })}   
-    </PaginationBarWrapper>
-  )
-}
-
 
 export default PaginationBar

@@ -1,4 +1,4 @@
-import { CenteredFlexCol } from "./generalComponents"
+import { CenteredFlexCol } from "../generalComponents"
 
 function NoPokemonImageFound() {
   return (

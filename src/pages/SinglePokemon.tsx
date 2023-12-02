@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getPokemonData, getMaxNumberOfPokemons } from '../functions/poke-functions'
-import PokemonCard from '../components/PokemonCard'
-import PaginationBar from '../components/PaginationBar'
-import LoadingFeedback from '../components/LoadingFeedback'
+import PokemonCard from '../components/poke components/PokemonCard'
+import PaginationBar from '../components/poke components/PaginationBar'
+import LoadingFeedback from '../components/poke components/LoadingFeedback'
 import { CenteredPage } from '../components/generalComponents'
 import { PokemonData } from '../types'
 

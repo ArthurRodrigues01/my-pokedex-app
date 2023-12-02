@@ -1,15 +1,6 @@
 import styled from 'styled-components'
 import { FlexCol, FlexRow, BigTitle } from './generalComponents'
 
-const RightSideNavbar = styled(FlexCol)`
-  position: fixed;
-  height: 100vh;
-  background-color: green;
-  float: left;
-  width: 16rem;
-  padding: 1.5rem;
-`
-
 function Header() {
   return (
     <RightSideNavbar gap={25}>
@@ -21,5 +12,14 @@ function Header() {
     </RightSideNavbar>
   )
 }
+
+const RightSideNavbar = styled(FlexCol)`
+  position: fixed;
+  height: 100vh;
+  background-color: green;
+  float: left;
+  width: 16rem;
+  padding: 1.5rem;
+`
 
 export default Header

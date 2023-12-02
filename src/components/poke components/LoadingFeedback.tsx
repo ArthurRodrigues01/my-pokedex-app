@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components'
-import { CenteredFlexCol, BigTitle } from './generalComponents'
+import { CenteredFlexCol, BigTitle } from '../generalComponents'
 
 const rotatingAnimation = keyframes`
   from {

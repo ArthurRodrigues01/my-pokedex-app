@@ -3,8 +3,42 @@ import styled from 'styled-components'
 import { TypeImage, TypeSphere, getPokemonTypeColor, getPokemonWrapperBGColor } from './pokemonTypeSphereComponents'
 import { SpriteSphere, SpriteImage } from './generalPokemonComponents'
 import NoPokemonImageFound from './NoPokemonImageFound'
-import { PokedexEntry, PokemonData } from '../types'
-import { capitalize, rmFchars } from '../functions/other-functions'
+import { PokedexEntry, PokemonData } from '../../types'
+import { capitalize, rmFchars } from '../../functions/other-functions'
+
+function PokemonCard(props: PokemonData) {
+  const [entry, setEntry] = useState(props.pokedex_entries[0] ? rmFchars(props.pokedex_entries[0].flavor_text) : 'No description available') 
+
+  return (
+    <PokemonWrapper type={props.types[0]}>
+      <StatsWrapper type={props.types[0]}>
+        <h2>{capitalize(props.name)} #{props.id}</h2>
+        <SpriteSphere>
+          {props.sprite_src ? <SpriteImage src={props.sprite_src}/> : <NoPokemonImageFound/>}
+        </SpriteSphere>
+        <h2>Gen: {props.gen}</h2>
+        <h2>Weight: {props.weight}KG</h2>
+        <h2>Height: {props.height}M</h2>
+        <PokemonTypeWrapper>
+          {props.types.map((type: string) => {
+            return <TypeSphere type={type} key={type}><TypeImage src={`/assets/pokemon-types/${type}.svg`}/></TypeSphere>
+          })}
+        </PokemonTypeWrapper>
+      </StatsWrapper>
+      <FlexCol>
+        <Description>{entry}</Description>
+        <VersionSelectorWrapper>
+          <VersionSelectorLabel>Version:</VersionSelectorLabel>
+          <VersionSelector onChange={(e) => { setEntry(rmFchars(props.pokedex_entries.filter((elm: PokedexEntry) => elm.version.name == e.target.value)[0].flavor_text))}}>
+            {props.pokedex_entries.map((pokedexEntry: PokedexEntry) => {
+              return <option key={pokedexEntry.version.name} value={pokedexEntry.version.name}>{capitalize(pokedexEntry.version.name)}</option>
+            })}
+          </VersionSelector>
+        </VersionSelectorWrapper>
+      </FlexCol>
+    </PokemonWrapper>
+  )
+}
 
 const PokemonWrapper = styled.div<{ type: string }>`
   width: 800px;
@@ -74,39 +108,5 @@ const VersionSelectorWrapper = styled.div`
   bottom: 15px;
   left: 15px;
 `
-
-function PokemonCard(props: PokemonData) {
-  const [entry, setEntry] = useState(props.pokedex_entries[0] ? rmFchars(props.pokedex_entries[0].flavor_text) : 'No description available') 
-
-  return (
-    <PokemonWrapper type={props.types[0]}>
-      <StatsWrapper type={props.types[0]}>
-        <h2>{capitalize(props.name)} #{props.id}</h2>
-        <SpriteSphere>
-          {props.sprite_src ? <SpriteImage src={props.sprite_src}/> : <NoPokemonImageFound/>}
-        </SpriteSphere>
-        <h2>Gen: {props.gen}</h2>
-        <h2>Weight: {props.weight}KG</h2>
-        <h2>Height: {props.height}M</h2>
-        <PokemonTypeWrapper>
-          {props.types.map((type: string) => {
-            return <TypeSphere type={type} key={type}><TypeImage src={`/assets/pokemon-types/${type}.svg`}/></TypeSphere>
-          })}
-        </PokemonTypeWrapper>
-      </StatsWrapper>
-      <FlexCol>
-        <Description>{entry}</Description>
-        <VersionSelectorWrapper>
-          <VersionSelectorLabel>Version:</VersionSelectorLabel>
-          <VersionSelector onChange={(e) => { setEntry(rmFchars(props.pokedex_entries.filter((elm: PokedexEntry) => elm.version.name == e.target.value)[0].flavor_text))}}>
-            {props.pokedex_entries.map((pokedexEntry: PokedexEntry) => {
-              return <option key={pokedexEntry.version.name} value={pokedexEntry.version.name}>{capitalize(pokedexEntry.version.name)}</option>
-            })}
-          </VersionSelector>
-        </VersionSelectorWrapper>
-      </FlexCol>
-    </PokemonWrapper>
-  )
-}
 
 export default PokemonCard

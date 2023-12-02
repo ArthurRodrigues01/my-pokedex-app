@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-const POKEMONS_PER_LINE = 3
+const POKEMONS_PER_ROW = 3
 const POKEMONS_PER_COLUMN = 16
-const LIMIT = POKEMONS_PER_LINE * POKEMONS_PER_COLUMN
+const LIMIT = POKEMONS_PER_ROW * POKEMONS_PER_COLUMN
 
 
 function usePreviewPokemons() {
@@ -25,7 +25,8 @@ function usePreviewPokemons() {
 
   const fetchNextPokemons = useCallback(() => {
     if (nextFetch.current == null) {
-      console.log('acabou')     
+      // TODO: add a "no more pokemons" handler
+      console.log('no more pokemons')     
     }
 
     isFetchingMore.current = true
